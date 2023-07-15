@@ -13,7 +13,6 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-
 'Ontwikkeld door: Freddy Meijer - Functioneel applicatiebeheerder VTH
 'Organisatie: Gemeente Leiden
 'Datum: 14-07-2023
@@ -26,6 +25,7 @@ Dim strEersteCel As String
 Dim strCheck As String
 Dim strPad As String
 Dim strLocatieLogos As String
+Dim sngPaginaBreedte As Single
 
 'De gebruiker kiest voor welke gemeente hij een kennisitem of handleiding wil schrijven. Dit doet de gebruiker via userform ufOnenoteImport.
 'Hierin wordt een gemeente gekozen via de combobox cbGemeeente. Afhankelijk van de keuze wordt een basiskleur gekozen
@@ -38,8 +38,13 @@ If Me.cbGemeente = "Zoeterwoude" Then intKleur = 9
 
 'De gebruiker kiest of de orientatie van de pagina staand of liggend moet zijn. Dit doet hij via userform ufOnenoteImport. Hierin wordt in de combobox cbPagina aangegeven of de pagina's moeten liggen of staan.
 
-If Me.cbPagina = "Staand" Then ActiveDocument.PageSetup.Orientation = wdOrientPortrait
-If Me.cbPagina = "Liggend" Then ActiveDocument.PageSetup.Orientation = wdOrientLandscape
+If Me.cbPagina = "Staand" Then ActiveDocument.PageSetup.Orientation = 0
+If Me.cbPagina = "Liggend" Then ActiveDocument.PageSetup.Orientation = 1
+
+sngPaginaBreedte = ActiveDocument.PageSetup.pageWidth - (ActiveDocument.PageSetup.RightMargin + ActiveDocument.PageSetup.RightMargin)
+
+dblKolom_1 = 0.33 * sngPaginaBreedte
+dblKolom_2 = 0.66 * sngPaginaBreedte
 
 'In onderstaande for-loop gebeuren twee dingen:
 '- Als de paragraaftekst vetgedrukt is, moet deze tekst de kleur krijgen die overeenkomt met de gekozen gemeente (Me.cbGemeente)
@@ -115,9 +120,6 @@ Next
     'breedte van kolom 2. Als kolom 1 5 cm breed is, is kolom 2 per definitie (16 - 5)
     '11 cm breed.
 
-    dblKolom_1 = Me.tbBreedte * 28.34646
-    dblKolom_2 = (16 * 28.34646) - dblKolom_1
-
     strCheck = "Versie"
 
     For i = 1 To ActiveDocument.Tables.Count
@@ -134,13 +136,11 @@ Next
         End If
     Next
 
-   'De meeste plaatjes staan in kolom 2. De figuren worden 1 cm minder breed dan kolom 2.
-
-    dblOmzettenFiguur = dblKolom_2 - 28.34646
+   'Een mooie standaardwaarde voor figuren is 10 cm. Dat wordt hieronder per figuur gedefinieerd.
 
     For i = 1 To ActiveDocument.InlineShapes.Count
 
-        ActiveDocument.InlineShapes(i).Width = dblOmzettenFiguur
+        ActiveDocument.InlineShapes(i).Width = (10 * 28.34646)
 
     Next
 
@@ -155,10 +155,8 @@ Private Sub UserForm_Initialize()
         .AddItem ("Oegstgeest")
         .AddItem ("Zoeterwoude")
     End With
-    
-    With Me.cbPagina
-        .AddItem ("Staand")
-        .AddItem ("Liggend")
-    End With
 
 End Sub
+
+
+
