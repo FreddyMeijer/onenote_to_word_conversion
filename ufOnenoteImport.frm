@@ -12,7 +12,8 @@ Attribute VB_Name = "ufOnenoteImport"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
-Attribute VB_Exposed = False
+Attribute VB_Exposed = 
+
 'Ontwikkeld door: Freddy Meijer - Functioneel applicatiebeheerder VTH
 'Organisatie: Gemeente Leiden
 'Datum: 14-07-2023
@@ -30,7 +31,6 @@ Dim sngPaginaBreedte As Single
 'De gebruiker kiest voor welke gemeente hij een kennisitem of handleiding wil schrijven. Dit doet de gebruiker via userform ufOnenoteImport.
 'Hierin wordt een gemeente gekozen via de combobox cbGemeeente. Afhankelijk van de keuze wordt een basiskleur gekozen
 
-If Me.cbGemeente = "Persoonlijk" Then intKleur = 5
 If Me.cbGemeente = "Leiden" Then intKleur = 6
 If Me.cbGemeente = "Leiderdorp" Then intKleur = 14
 If Me.cbGemeente = "Oegstgeest" Then intKleur = 11
@@ -149,7 +149,6 @@ End Sub
 Private Sub UserForm_Initialize()
 
     With Me.cbGemeente
-        .AddItem ("Persoonlijk")
         .AddItem ("Leiden")
         .AddItem ("Leiderdorp")
         .AddItem ("Oegstgeest")
