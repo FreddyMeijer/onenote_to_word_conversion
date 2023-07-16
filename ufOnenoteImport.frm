@@ -12,8 +12,7 @@ Attribute VB_Name = "ufOnenoteImport"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
-Attribute VB_Exposed = 
-
+Attribute VB_Exposed = False
 'Ontwikkeld door: Freddy Meijer - Functioneel applicatiebeheerder VTH
 'Organisatie: Gemeente Leiden
 'Datum: 14-07-2023
@@ -136,11 +135,16 @@ Next
         End If
     Next
 
-   'Een mooie standaardwaarde voor figuren is 10 cm. Dat wordt hieronder per figuur gedefinieerd.
-
+   'Als een figuur in een tabel staat moet het figuur 75% van de celbreedte als breedte hebben.
+   'Als het figuur niet in een tabel staat, wordt het 125% van de celbreedte van kolom 1 van een tabel.
+   
     For i = 1 To ActiveDocument.InlineShapes.Count
-
-        ActiveDocument.InlineShapes(i).Width = (10 * 28.34646)
+    
+        If ActiveDocument.InlineShapes(i).Range.Information(wdWithInTable) Then
+            ActiveDocument.InlineShapes(i).Width = 0.75 * dblKolom_2
+        Else
+            ActiveDocument.InlineShapes(i).Width = 1.25 * dblKolom_1
+        End If
 
     Next
 
@@ -153,6 +157,11 @@ Private Sub UserForm_Initialize()
         .AddItem ("Leiderdorp")
         .AddItem ("Oegstgeest")
         .AddItem ("Zoeterwoude")
+    End With
+
+    With Me.cbPagina
+        .AddItem ("Staand")
+        .AddItem ("Liggend")
     End With
 
 End Sub
