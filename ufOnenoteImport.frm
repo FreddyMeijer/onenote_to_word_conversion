@@ -40,6 +40,10 @@ If Me.cbGemeente = "Zoeterwoude" Then intKleur = 9
 If Me.cbPagina = "Staand" Then ActiveDocument.PageSetup.Orientation = 0
 If Me.cbPagina = "Liggend" Then ActiveDocument.PageSetup.Orientation = 1
 
+If Me.cbFormaat = "A4" Then ActiveDocument.PageSetup.PaperSize = wdPaperA4
+If Me.cbFormaat = "A3" Then ActiveDocument.PageSetup.PaperSize = wdPaperA3
+If Me.cbFormaat = "A5" Then ActiveDocument.PageSetup.PaperSize = wdPaperA5
+
 sngPaginaBreedte = ActiveDocument.PageSetup.pageWidth - (ActiveDocument.PageSetup.RightMargin + ActiveDocument.PageSetup.RightMargin)
 
 dblKolom_1 = 0.33 * sngPaginaBreedte
@@ -143,10 +147,14 @@ Next
         If ActiveDocument.InlineShapes(i).Range.Information(wdWithInTable) Then
             ActiveDocument.InlineShapes(i).Width = 0.75 * dblKolom_2
         Else
-            ActiveDocument.InlineShapes(i).Width = 1.25 * dblKolom_1
+            ActiveDocument.InlineShapes(i).Width = dblKolom_1
         End If
 
     Next
+
+End Sub
+
+Private Sub Label5_Click()
 
 End Sub
 
@@ -162,6 +170,13 @@ Private Sub UserForm_Initialize()
     With Me.cbPagina
         .AddItem ("Staand")
         .AddItem ("Liggend")
+    End With
+
+    With Me.cbFormaat
+        .AddItem ("")
+        .AddItem ("A4")
+        .AddItem ("A3")
+        .AddItem ("A5")
     End With
 
 End Sub
