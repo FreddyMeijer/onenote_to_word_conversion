@@ -17,4 +17,4 @@ Figuren in het document krijgen automatisch een breedte. Hierbij moet je rekenin
 - de kolombreedte van **kolom 1** indien het figuur niet in een tabel staat
 
 ## Start_Form.bas
-Als je het formulier hebt ingelezen kan je dit bestand ook inlezen. Dit macro start simpelweg de userform op. Dit macro zou je als knop op kunnen nemen in jouw Word-lint.
+Als je het formulier hebt ingelezen kan je dit bestand ook inlezen. Dit macro start simpelweg de userform op. Dit macro zou je als knop op kunnen nemen in jouw Word-lint. 
