@@ -12,7 +12,7 @@ Tabellen worden opgemaakt op basis van de paginabreedte. De paginabreedte wordt 
 
 ### Figuren
 Figuren in het document krijgen automatisch een breedte. Hierbij moet je rekening houden met de vraag of een figuur in een tabel staat of niet. De breedte voor een figuur is:
-
+ 
 - 75% van de kolombreedte van **kolom_2** indien het figuur in een tabel staat
 - de kolombreedte van **kolom 1** indien het figuur niet in een tabel staat
 
