@@ -61,26 +61,16 @@ For intTeller = 1 To ActiveDocument.Paragraphs.Count
         .Font.ColorIndex = intKleur
       End With
   End If
-  
 
-
-'   If ActiveDocument.Paragraphs(intTeller).Range.Font.Name = "Consolas" Then
-'     With ActiveDocument.Paragraphs(intTeller).Range
-'         .Shading.BackgroundPatternColor = -603923969
-'         .Font.Size = 10.5
-'     End With
-'   End If
 Next
 
 For Each rngWoord In ActiveDocument.Words
     If rngWoord.Font.Name = "Consolas" Then
-        rngWoord.Font.Size = 10.5
+        rngWoord.Font.Size = 9.5
         rngWoord.Shading.BackgroundPatternColor = -603923969
     End If
     rngWoord.Collapse wdCollapseEnd
 Next rngWoord
-   
-
 
   'Omdat de kennisitems beginnen met een tabel die 4 kolommen bevat en start met 'versie' (eerste cel, opgeslagen in strCheck) moet deze anders opgemaakt worden dan de meeste tabellen waarin toelichting staat.
   'In onderstaande for-loop wordt gecontroleerd of cel A1 gevuld is met het woord uit strCheck of dat de tabel meer dan 2 kolommen heeft. Indien zo, moet de eerste regel gevuld worden met de gekozen kleur.
@@ -160,14 +150,10 @@ Next rngWoord
         If ActiveDocument.InlineShapes(i).Range.Information(wdWithInTable) Then
             ActiveDocument.InlineShapes(i).Width = 0.75 * dblKolom_2
         Else
-            ActiveDocument.InlineShapes(i).Width = dblKolom_1
+            ActiveDocument.InlineShapes(i).Width = 1.5 * dblKolom_1
         End If
 
     Next
-
-End Sub
-
-Private Sub Label5_Click()
 
 End Sub
 
