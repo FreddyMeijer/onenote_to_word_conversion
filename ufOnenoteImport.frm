@@ -26,7 +26,7 @@ Dim strCheck As String
 Dim strPad As String
 Dim strLocatieLogos As String
 Dim sngPaginaBreedte As Single
-Dim rngWoord as Range
+Dim rngWoord As Range
 
 'De gebruiker kiest voor welke gemeente hij een kennisitem of handleiding wil schrijven. Dit doet de gebruiker via userform ufOnenoteImport.
 'Hierin wordt een gemeente gekozen via de combobox cbGemeeente. Afhankelijk van de keuze wordt een basiskleur gekozen
@@ -61,14 +61,26 @@ For intTeller = 1 To ActiveDocument.Paragraphs.Count
         .Font.ColorIndex = intKleur
       End With
   End If
+  
 
-For each rngWoord in ActiveDocument.Words
+
+'   If ActiveDocument.Paragraphs(intTeller).Range.Font.Name = "Consolas" Then
+'     With ActiveDocument.Paragraphs(intTeller).Range
+'         .Shading.BackgroundPatternColor = -603923969
+'         .Font.Size = 10.5
+'     End With
+'   End If
+Next
+
+For Each rngWoord In ActiveDocument.Words
     If rngWoord.Font.Name = "Consolas" Then
         rngWoord.Font.Size = 10.5
         rngWoord.Shading.BackgroundPatternColor = -603923969
-    end if
+    End If
     rngWoord.Collapse wdCollapseEnd
 Next rngWoord
+   
+
 
   'Omdat de kennisitems beginnen met een tabel die 4 kolommen bevat en start met 'versie' (eerste cel, opgeslagen in strCheck) moet deze anders opgemaakt worden dan de meeste tabellen waarin toelichting staat.
   'In onderstaande for-loop wordt gecontroleerd of cel A1 gevuld is met het woord uit strCheck of dat de tabel meer dan 2 kolommen heeft. Indien zo, moet de eerste regel gevuld worden met de gekozen kleur.
