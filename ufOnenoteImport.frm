@@ -155,6 +155,8 @@ Next rngWoord
 
     Next
 
+    msgbox "De omzetting van OneNote naar Word is voltooid."
+
 End Sub
 
 Private Sub UserForm_Initialize()
