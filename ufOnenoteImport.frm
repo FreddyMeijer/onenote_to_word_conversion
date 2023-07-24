@@ -93,17 +93,23 @@ Next rngWord
 
     'Voordat het logo in de rechterbovenhoek geplaatst kan worden, dienen alle bestaande figuren verwijderd te worden.
     'Op deze manier zou je van een Leids kennisitem eenvoudig een Zoeterwouds kennisitem kunnen maken. Vervolgens wordt het figuur uit de map in de rechterbovenhoek geplaatst.
-
-    With doc.Sections(1).Headers(wdHeaderFooterPrimary).Range
-        .Delete
-        If Me.cbFormaat = "A5" Then
+ 
+    If Me.cbFormaat = "A5" Then
+        With doc.Sections(1).Headers(wdHeaderFooterPrimary).Range
+            .Delete
             set ilsLogo =.InlineShapes.AddPicture (strPath)
             ilsLogo.lockaspectratio = msofalse
-            islLogo.Width = islLogo.Width * 0,33
-            islLogo.Height = islLogo.Height * 0,33
-        End if
-        .ParagraphFormat.Alignment = wdAlignParagraphRight
-    End With
+            ilsLogo.Width = ilsLogo.Width * 0.33
+            ilsLogo.Height = ilsLogo.Height * 0.33
+            .ParagraphFormat.Alignment = wdAlignParagraphRight
+        End With
+    Else
+        With doc.Sections(1).Headers(wdHeaderFooterPrimary).Range
+            .Delete
+            .InlineShapes.AddPicture (strPath)
+            .ParagraphFormat.Alignment = wdAlignParagraphRight
+        End With
+    End if
 
     'Op dezelfde manier worden onderaan de pagina paginanummers toegevoegd
 
