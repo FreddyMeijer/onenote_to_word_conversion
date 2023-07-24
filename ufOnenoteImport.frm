@@ -25,6 +25,7 @@ Dim intCounter As Integer
 Dim sngPageWidth As Single
 Dim rngWord As Range
 Dim doc as Document
+Dim ilsLogo as InlineShape
 
 Set doc = ActiveDocument
 
@@ -95,7 +96,12 @@ Next rngWord
 
     With doc.Sections(1).Headers(wdHeaderFooterPrimary).Range
         .Delete
-        .InlineShapes.AddPicture (strPath)
+        If Me.cbFormaat = "A5" Then
+            set ilsLogo =.InlineShapes.AddPicture (strPath)
+            ilsLogo.lockaspectratio = msofalse
+            islLogo.Width = islLogo.Width * 0,33
+            islLogo.Height = islLogo.Height * 0,33
+        End if
         .ParagraphFormat.Alignment = wdAlignParagraphRight
     End With
 
